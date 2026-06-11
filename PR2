@@ -1,0 +1,76 @@
+// University Student Portal - Student, Faculty, Admin with login/logout
+
+interface Authenticable {
+    void login(String username, String password);
+    void logout();
+}
+
+class Student implements Authenticable {
+    private String name;
+
+    public Student(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void login(String username, String password) {
+        System.out.println("Student " + name + " logged in as: " + username);
+    }
+
+    @Override
+    public void logout() {
+        System.out.println("Student " + name + " logged out.");
+    }
+}
+
+class Faculty implements Authenticable {
+    private String name;
+
+    public Faculty(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void login(String username, String password) {
+        System.out.println("Faculty " + name + " logged in as: " + username);
+    }
+
+    @Override
+    public void logout() {
+        System.out.println("Faculty " + name + " logged out.");
+    }
+}
+
+class Admin implements Authenticable {
+    private String name;
+
+    public Admin(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void login(String username, String password) {
+        System.out.println("Admin " + name + " logged in as: " + username);
+    }
+
+    @Override
+    public void logout() {
+        System.out.println("Admin " + name + " logged out.");
+    }
+}
+
+public class Q2_UniversityPortal {
+    public static void main(String[] args) {
+        Authenticable[] users = {
+            new Student("Alice"),
+            new Faculty("Dr. Smith"),
+            new Admin("AdminJohn")
+        };
+
+        for (Authenticable user : users) {
+            user.login("user123", "pass@123");
+            user.logout();
+            System.out.println();
+        }
+    }
+}
