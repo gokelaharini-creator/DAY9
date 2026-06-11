@@ -1,0 +1,93 @@
+// Smart Home Device System - Fan, Light, AirConditioner
+
+interface SmartDevice {
+    void turnOn();
+    void turnOff();
+    void getStatus();
+}
+
+class Fan implements SmartDevice {
+    private String location;
+
+    public Fan(String location) {
+        this.location = location;
+    }
+
+    @Override
+    public void turnOn() {
+        System.out.println("Fan at " + location + " is now ON.");
+    }
+
+    @Override
+    public void turnOff() {
+        System.out.println("Fan at " + location + " is now OFF.");
+    }
+
+    @Override
+    public void getStatus() {
+        System.out.println("Fan [Location: " + location + "]");
+    }
+}
+
+class Light implements SmartDevice {
+    private String room;
+
+    public Light(String room) {
+        this.room = room;
+    }
+
+    @Override
+    public void turnOn() {
+        System.out.println("Light in " + room + " is now ON.");
+    }
+
+    @Override
+    public void turnOff() {
+        System.out.println("Light in " + room + " is now OFF.");
+    }
+
+    @Override
+    public void getStatus() {
+        System.out.println("Light [Room: " + room + "]");
+    }
+}
+
+class AirConditioner implements SmartDevice {
+    private int temperature;
+
+    public AirConditioner(int temperature) {
+        this.temperature = temperature;
+    }
+
+    @Override
+    public void turnOn() {
+        System.out.println("AC is now ON at " + temperature + "°C.");
+    }
+
+    @Override
+    public void turnOff() {
+        System.out.println("AC is now OFF.");
+    }
+
+    @Override
+    public void getStatus() {
+        System.out.println("AirConditioner [Set Temp: " + temperature + "°C]");
+    }
+}
+
+public class Q3_SmartHome {
+    public static void main(String[] args) {
+        SmartDevice[] devices = {
+            new Fan("Living Room"),
+            new Light("Bedroom"),
+            new AirConditioner(22)
+        };
+
+        for (SmartDevice device : devices) {
+            device.getStatus();
+            device.turnOn();
+            device.turnOff();
+            System.out.println();
+        }
+    }
+}
