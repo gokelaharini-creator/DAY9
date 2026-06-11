@@ -1,0 +1,125 @@
+// Transport Ticket Booking - BusTicket, TrainTicket, FlightTicket
+
+interface Ticket {
+    void bookTicket(String passengerName);
+    void cancelTicket();
+    void displayTicketInfo();
+}
+
+class BusTicket implements Ticket {
+    private String source;
+    private String destination;
+    private double fare;
+    private String passengerName;
+
+    public BusTicket(String source, String destination, double fare) {
+        this.source = source;
+        this.destination = destination;
+        this.fare = fare;
+    }
+
+    @Override
+    public void bookTicket(String passengerName) {
+        this.passengerName = passengerName;
+        System.out.println("Bus Ticket booked for " + passengerName + " from " + source + " to " + destination);
+    }
+
+    @Override
+    public void cancelTicket() {
+        System.out.println("Bus Ticket for " + passengerName + " has been cancelled.");
+    }
+
+    @Override
+    public void displayTicketInfo() {
+        System.out.println("Bus Ticket | Passenger: " + passengerName
+                + " | Route: " + source + " -> " + destination + " | Fare: Rs." + fare);
+    }
+}
+
+class TrainTicket implements Ticket {
+    private String trainNumber;
+    private String source;
+    private String destination;
+    private String seatClass;
+    private double fare;
+    private String passengerName;
+
+    public TrainTicket(String trainNumber, String source, String destination, String seatClass, double fare) {
+        this.trainNumber = trainNumber;
+        this.source = source;
+        this.destination = destination;
+        this.seatClass = seatClass;
+        this.fare = fare;
+    }
+
+    @Override
+    public void bookTicket(String passengerName) {
+        this.passengerName = passengerName;
+        System.out.println("Train Ticket booked for " + passengerName + " | Train: " + trainNumber
+                + " | " + source + " -> " + destination + " [" + seatClass + "]");
+    }
+
+    @Override
+    public void cancelTicket() {
+        System.out.println("Train Ticket for " + passengerName + " on " + trainNumber + " cancelled.");
+    }
+
+    @Override
+    public void displayTicketInfo() {
+        System.out.println("Train Ticket | Passenger: " + passengerName + " | Train: " + trainNumber
+                + " | " + source + " -> " + destination + " | Class: " + seatClass + " | Fare: Rs." + fare);
+    }
+}
+
+class FlightTicket implements Ticket {
+    private String flightNumber;
+    private String source;
+    private String destination;
+    private String seatType;
+    private double fare;
+    private String passengerName;
+
+    public FlightTicket(String flightNumber, String source, String destination, String seatType, double fare) {
+        this.flightNumber = flightNumber;
+        this.source = source;
+        this.destination = destination;
+        this.seatType = seatType;
+        this.fare = fare;
+    }
+
+    @Override
+    public void bookTicket(String passengerName) {
+        this.passengerName = passengerName;
+        System.out.println("Flight Ticket booked for " + passengerName + " | Flight: " + flightNumber
+                + " | " + source + " -> " + destination + " [" + seatType + "]");
+    }
+
+    @Override
+    public void cancelTicket() {
+        System.out.println("Flight Ticket for " + passengerName + " on " + flightNumber + " cancelled.");
+    }
+
+    @Override
+    public void displayTicketInfo() {
+        System.out.println("Flight Ticket | Passenger: " + passengerName + " | Flight: " + flightNumber
+                + " | " + source + " -> " + destination + " | Seat: " + seatType + " | Fare: Rs." + fare);
+    }
+}
+
+public class Q9_TransportTicketBooking {
+    public static void main(String[] args) {
+        Ticket[] tickets = {
+            new BusTicket("Chennai", "Bangalore", 350),
+            new TrainTicket("12657", "Chennai", "Mumbai", "Sleeper", 850),
+            new FlightTicket("AI202", "Chennai", "Delhi", "Economy", 5500)
+        };
+
+        String[] passengers = {"Alice", "Bob", "Charlie"};
+
+        for (int i = 0; i < tickets.length; i++) {
+            tickets[i].bookTicket(passengers[i]);
+            tickets[i].displayTicketInfo();
+            System.out.println();
+        }
+    }
+}
