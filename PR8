@@ -1,0 +1,106 @@
+//  Banking Interest Calculator - SavingsAccount, FixedDeposit, RecurringDeposit
+
+interface BankAccount {
+    void displayInterestDetails();
+    double calculateInterest();
+}
+
+class SavingsAccount implements BankAccount {
+    private String accountHolder;
+    private double principal;
+    private double annualRate; // in %
+
+    public SavingsAccount(String accountHolder, double principal, double annualRate) {
+        this.accountHolder = accountHolder;
+        this.principal = principal;
+        this.annualRate = annualRate;
+    }
+
+    @Override
+    public double calculateInterest() {
+        return (principal * annualRate) / 100;
+    }
+
+    @Override
+    public void displayInterestDetails() {
+        System.out.println("--- Savings Account ---");
+        System.out.println("Holder: " + accountHolder);
+        System.out.println("Principal: Rs." + principal);
+        System.out.println("Annual Rate: " + annualRate + "%");
+        System.out.printf("Annual Interest: Rs.%.2f%n", calculateInterest());
+    }
+}
+
+class FixedDeposit implements BankAccount {
+    private String accountHolder;
+    private double principal;
+    private double annualRate;
+    private int years;
+
+    public FixedDeposit(String accountHolder, double principal, double annualRate, int years) {
+        this.accountHolder = accountHolder;
+        this.principal = principal;
+        this.annualRate = annualRate;
+        this.years = years;
+    }
+
+    @Override
+    public double calculateInterest() {
+        // Compound Interest: A = P(1 + r/100)^t
+        double amount = principal * Math.pow(1 + annualRate / 100, years);
+        return amount - principal;
+    }
+
+    @Override
+    public void displayInterestDetails() {
+        System.out.println("--- Fixed Deposit ---");
+        System.out.println("Holder: " + accountHolder);
+        System.out.println("Principal: Rs." + principal);
+        System.out.println("Annual Rate: " + annualRate + "% | Duration: " + years + " year(s)");
+        System.out.printf("Total Interest (Compound): Rs.%.2f%n", calculateInterest());
+    }
+}
+
+class RecurringDeposit implements BankAccount {
+    private String accountHolder;
+    private double monthlyDeposit;
+    private double annualRate;
+    private int months;
+
+    public RecurringDeposit(String accountHolder, double monthlyDeposit, double annualRate, int months) {
+        this.accountHolder = accountHolder;
+        this.monthlyDeposit = monthlyDeposit;
+        this.annualRate = annualRate;
+        this.months = months;
+    }
+
+    @Override
+    public double calculateInterest() {
+        // RD Interest = P * n * (n+1) * r / (2 * 12 * 100)
+        return monthlyDeposit * months * (months + 1) * annualRate / (2 * 12 * 100);
+    }
+
+    @Override
+    public void displayInterestDetails() {
+        System.out.println("--- Recurring Deposit ---");
+        System.out.println("Holder: " + accountHolder);
+        System.out.println("Monthly Deposit: Rs." + monthlyDeposit);
+        System.out.println("Annual Rate: " + annualRate + "% | Duration: " + months + " month(s)");
+        System.out.printf("Total Interest: Rs.%.2f%n", calculateInterest());
+    }
+}
+
+public class Q8_BankingInterestCalculator {
+    public static void main(String[] args) {
+        BankAccount[] accounts = {
+            new SavingsAccount("Alice", 50000, 4.5),
+            new FixedDeposit("Bob", 100000, 7.0, 3),
+            new RecurringDeposit("Charlie", 5000, 6.5, 12)
+        };
+
+        for (BankAccount account : accounts) {
+            account.displayInterestDetails();
+            System.out.println();
+        }
+    }
+}
