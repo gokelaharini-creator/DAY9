@@ -1,0 +1,97 @@
+//  Shape Drawing Tool - Circle, Rectangle, Triangle
+
+interface Shape {
+    void draw();
+    double calculateArea();
+    double calculatePerimeter();
+}
+
+class Circle implements Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing Circle with radius: " + radius);
+    }
+
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+class Rectangle implements Shape {
+    private double length, width;
+
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing Rectangle with length: " + length + ", width: " + width);
+    }
+
+    @Override
+    public double calculateArea() {
+        return length * width;
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return 2 * (length + width);
+    }
+}
+
+class Triangle implements Shape {
+    private double a, b, c;
+
+    public Triangle(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing Triangle with sides: " + a + ", " + b + ", " + c);
+    }
+
+    @Override
+    public double calculateArea() {
+        double s = (a + b + c) / 2;
+        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    }
+
+    @Override
+    public double calculatePerimeter() {
+        return a + b + c;
+    }
+}
+
+public class Q5_ShapeDrawing {
+    public static void main(String[] args) {
+        Shape[] shapes = {
+            new Circle(7),
+            new Rectangle(5, 10),
+            new Triangle(3, 4, 5)
+        };
+
+        for (Shape shape : shapes) {
+            shape.draw();
+            System.out.printf("Area: %.2f%n", shape.calculateArea());
+            System.out.printf("Perimeter: %.2f%n", shape.calculatePerimeter());
+            System.out.println();
+        }
+    }
+}
