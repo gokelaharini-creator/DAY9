@@ -1,0 +1,116 @@
+// Online Examination System - MCQExam, CodingExam, VivaExam
+
+interface Exam {
+    void startExam(String studentName);
+    void evaluate();
+    void displayResult();
+}
+
+class MCQExam implements Exam {
+    private String studentName;
+    private int correctAnswers;
+    private int totalQuestions;
+
+    public MCQExam(int correctAnswers, int totalQuestions) {
+        this.correctAnswers = correctAnswers;
+        this.totalQuestions = totalQuestions;
+    }
+
+    @Override
+    public void startExam(String studentName) {
+        this.studentName = studentName;
+        System.out.println("MCQ Exam started for: " + studentName);
+    }
+
+    @Override
+    public void evaluate() {
+        System.out.println("Evaluating MCQ Exam for " + studentName + "...");
+    }
+
+    @Override
+    public void displayResult() {
+        double score = ((double) correctAnswers / totalQuestions) * 100;
+        System.out.println("MCQ Exam Result | Student: " + studentName
+                + " | Score: " + correctAnswers + "/" + totalQuestions
+                + " (" + score + "%) | " + (score >= 40 ? "PASS" : "FAIL"));
+    }
+}
+
+class CodingExam implements Exam {
+    private String studentName;
+    private int testCasesPassed;
+    private int totalTestCases;
+
+    public CodingExam(int testCasesPassed, int totalTestCases) {
+        this.testCasesPassed = testCasesPassed;
+        this.totalTestCases = totalTestCases;
+    }
+
+    @Override
+    public void startExam(String studentName) {
+        this.studentName = studentName;
+        System.out.println("Coding Exam started for: " + studentName);
+    }
+
+    @Override
+    public void evaluate() {
+        System.out.println("Running test cases for " + studentName + "'s code...");
+    }
+
+    @Override
+    public void displayResult() {
+        double score = ((double) testCasesPassed / totalTestCases) * 100;
+        System.out.println("Coding Exam Result | Student: " + studentName
+                + " | Test Cases: " + testCasesPassed + "/" + totalTestCases
+                + " (" + score + "%) | " + (score >= 50 ? "PASS" : "FAIL"));
+    }
+}
+
+class VivaExam implements Exam {
+    private String studentName;
+    private int marksObtained;
+    private int totalMarks;
+
+    public VivaExam(int marksObtained, int totalMarks) {
+        this.marksObtained = marksObtained;
+        this.totalMarks = totalMarks;
+    }
+
+    @Override
+    public void startExam(String studentName) {
+        this.studentName = studentName;
+        System.out.println("Viva Exam started for: " + studentName);
+    }
+
+    @Override
+    public void evaluate() {
+        System.out.println("Evaluating Viva performance of " + studentName + "...");
+    }
+
+    @Override
+    public void displayResult() {
+        double percentage = ((double) marksObtained / totalMarks) * 100;
+        System.out.println("Viva Result | Student: " + studentName
+                + " | Marks: " + marksObtained + "/" + totalMarks
+                + " (" + percentage + "%) | " + (percentage >= 50 ? "PASS" : "FAIL"));
+    }
+}
+
+public class Q10_OnlineExamination {
+    public static void main(String[] args) {
+        Exam[] exams = {
+            new MCQExam(18, 20),
+            new CodingExam(7, 10),
+            new VivaExam(38, 50)
+        };
+
+        String[] students = {"Alice", "Bob", "Charlie"};
+
+        for (int i = 0; i < exams.length; i++) {
+            exams[i].startExam(students[i]);
+            exams[i].evaluate();
+            exams[i].displayResult();
+            System.out.println();
+        }
+    }
+}
