@@ -1,0 +1,99 @@
+//  Media Player - AudioPlayer, VideoPlayer, PodcastPlayer
+
+interface MediaPlayer {
+    void play();
+    void pause();
+    void displayInfo();
+}
+
+class AudioPlayer implements MediaPlayer {
+    private String songName;
+    private String artist;
+
+    public AudioPlayer(String songName, String artist) {
+        this.songName = songName;
+        this.artist = artist;
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Playing Audio: " + songName + " by " + artist);
+    }
+
+    @Override
+    public void pause() {
+        System.out.println("Audio paused: " + songName);
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("AudioPlayer | Song: " + songName + " | Artist: " + artist);
+    }
+}
+
+class VideoPlayer implements MediaPlayer {
+    private String title;
+    private String resolution;
+
+    public VideoPlayer(String title, String resolution) {
+        this.title = title;
+        this.resolution = resolution;
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Playing Video: " + title + " in " + resolution);
+    }
+
+    @Override
+    public void pause() {
+        System.out.println("Video paused: " + title);
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("VideoPlayer | Title: " + title + " | Resolution: " + resolution);
+    }
+}
+
+class PodcastPlayer implements MediaPlayer {
+    private String podcastName;
+    private int episodeNumber;
+
+    public PodcastPlayer(String podcastName, int episodeNumber) {
+        this.podcastName = podcastName;
+        this.episodeNumber = episodeNumber;
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Playing Podcast: " + podcastName + " - Episode " + episodeNumber);
+    }
+
+    @Override
+    public void pause() {
+        System.out.println("Podcast paused: " + podcastName + " - Episode " + episodeNumber);
+    }
+
+    @Override
+    public void displayInfo() {
+        System.out.println("PodcastPlayer | Podcast: " + podcastName + " | Episode: " + episodeNumber);
+    }
+}
+
+public class Q7_MediaPlayer {
+    public static void main(String[] args) {
+        MediaPlayer[] players = {
+            new AudioPlayer("Believer", "Imagine Dragons"),
+            new VideoPlayer("Inception", "1080p"),
+            new PodcastPlayer("Tech Talks", 42)
+        };
+
+        for (MediaPlayer player : players) {
+            player.displayInfo();
+            player.play();
+            player.pause();
+            System.out.println();
+        }
+    }
+}
