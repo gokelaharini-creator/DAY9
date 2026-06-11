@@ -1,0 +1,40 @@
+//  Notification System using EmailNotification, SMSNotification, PushNotification
+
+interface Notifiable {
+    void sendNotification(String recipient, String message);
+}
+
+class EmailNotification implements Notifiable {
+    @Override
+    public void sendNotification(String recipient, String message) {
+        System.out.println("Email sent to " + recipient + ": " + message);
+    }
+}
+
+class SMSNotification implements Notifiable {
+    @Override
+    public void sendNotification(String recipient, String message) {
+        System.out.println("SMS sent to " + recipient + ": " + message);
+    }
+}
+
+class PushNotification implements Notifiable {
+    @Override
+    public void sendNotification(String recipient, String message) {
+        System.out.println("Push Notification sent to " + recipient + ": " + message);
+    }
+}
+
+public class Q1_NotificationSystem {
+    public static void main(String[] args) {
+        Notifiable[] notifications = {
+            new EmailNotification(),
+            new SMSNotification(),
+            new PushNotification()
+        };
+
+        for (Notifiable n : notifications) {
+            n.sendNotification("User123", "Your order has been shipped!");
+        }
+    }
+}
