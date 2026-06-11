@@ -1,0 +1,108 @@
+//  Food Ordering Application - Pizza, Burger, Beverage
+
+interface FoodOrder {
+    void placeOrder();
+    void displayOrderDetails();
+    double getPrice();
+}
+
+class Pizza implements FoodOrder {
+    private String size;
+    private String topping;
+    private double price;
+
+    public Pizza(String size, String topping, double price) {
+        this.size = size;
+        this.topping = topping;
+        this.price = price;
+    }
+
+    @Override
+    public void placeOrder() {
+        System.out.println("Pizza order placed: " + size + " size with " + topping);
+    }
+
+    @Override
+    public void displayOrderDetails() {
+        System.out.println("Pizza | Size: " + size + " | Topping: " + topping + " | Price: Rs." + price);
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
+    }
+}
+
+class Burger implements FoodOrder {
+    private String type;
+    private boolean extraCheese;
+    private double price;
+
+    public Burger(String type, boolean extraCheese, double price) {
+        this.type = type;
+        this.extraCheese = extraCheese;
+        this.price = price;
+    }
+
+    @Override
+    public void placeOrder() {
+        System.out.println("Burger order placed: " + type + (extraCheese ? " with extra cheese" : ""));
+    }
+
+    @Override
+    public void displayOrderDetails() {
+        System.out.println("Burger | Type: " + type + " | Extra Cheese: " + extraCheese + " | Price: Rs." + price);
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
+    }
+}
+
+class Beverage implements FoodOrder {
+    private String name;
+    private String size;
+    private double price;
+
+    public Beverage(String name, String size, double price) {
+        this.name = name;
+        this.size = size;
+        this.price = price;
+    }
+
+    @Override
+    public void placeOrder() {
+        System.out.println("Beverage order placed: " + size + " " + name);
+    }
+
+    @Override
+    public void displayOrderDetails() {
+        System.out.println("Beverage | Name: " + name + " | Size: " + size + " | Price: Rs." + price);
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
+    }
+}
+
+public class Q6_FoodOrdering {
+    public static void main(String[] args) {
+        FoodOrder[] orders = {
+            new Pizza("Large", "Pepperoni", 450),
+            new Burger("Veg", true, 180),
+            new Beverage("Coke", "Medium", 80)
+        };
+
+        double total = 0;
+        System.out.println("===== ORDER SUMMARY =====");
+        for (FoodOrder order : orders) {
+            order.placeOrder();
+            order.displayOrderDetails();
+            total += order.getPrice();
+            System.out.println();
+        }
+        System.out.println("Total Bill: Rs." + total);
+    }
+}
